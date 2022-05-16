@@ -1,0 +1,17 @@
+
+version: '3'
+services:
+    main:
+        container_name: main
+        build:
+            context: $PWD
+            dockerfile: docker/Dockerfile
+            args:
+            - BASE_IMAGE_FULLNAME=ubuntu:bionic
+        ports:
+        - 8080:8080
+        image: local/jwt-auth-server:${IMAGE_TAG_VERSION}
+        environment:
+            PORT: 8080
+        entrypoint: ["sh"]
+        command: ["-c", "/workspace/app/main"]
